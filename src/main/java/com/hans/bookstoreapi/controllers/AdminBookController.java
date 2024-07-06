@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ public class AdminBookController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Book create(@RequestBody BookFormDTO bookFormDTO){
+    public Book create(@RequestBody @Validated BookFormDTO bookFormDTO){
         return adminBookService.create(bookFormDTO);
     }
 
@@ -48,7 +49,7 @@ public class AdminBookController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<BackendResponse> update(@PathVariable Integer id, @RequestBody BookFormDTO bookFormDTO){
+    public ResponseEntity<BackendResponse> update(@PathVariable Integer id, @RequestBody @Validated BookFormDTO bookFormDTO){
         return adminBookService.update(id,  bookFormDTO);
     }
 
