@@ -1,7 +1,10 @@
 package com.hans.bookstoreapi.responses;
 
 import com.hans.bookstoreapi.entities.Book;
+import lombok.Data;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
+@Data
 public class BackendResponse {
 
     private String msg;
@@ -18,19 +21,8 @@ public class BackendResponse {
         this.book = book;
     }
 
-    public String getMsg() {
-        return msg;
+    public BackendResponse(MethodArgumentNotValidException exception) {
+        this.msg = exception.getBindingResult().getFieldError().getDefaultMessage();
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
 }
