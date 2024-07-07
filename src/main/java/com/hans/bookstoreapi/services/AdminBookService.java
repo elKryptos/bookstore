@@ -39,7 +39,7 @@ public class AdminBookService {
         return bookRepository.save(book);
     }
 
-    public ResponseEntity<BackendResponse> get( Integer id){
+    public ResponseEntity<BackendResponse> findById( Integer id){
         if(!bookRepository.existsById(id)){
             return ResponseEntity.status(404).body(new BackendResponse("Book not found"));
         } else {
