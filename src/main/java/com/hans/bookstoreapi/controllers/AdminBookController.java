@@ -45,7 +45,7 @@ public class AdminBookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BackendResponse> get(@PathVariable Integer id){
-        return adminBookService.get(id);
+        return adminBookService.findById(id);
     }
 
     @PutMapping("{id}")
