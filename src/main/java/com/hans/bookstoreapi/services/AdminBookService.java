@@ -2,6 +2,7 @@ package com.hans.bookstoreapi.services;
 
 import com.hans.bookstoreapi.dto.BookFormDTO;
 import com.hans.bookstoreapi.entities.Book;
+import com.hans.bookstoreapi.exception.BadRequestException;
 import com.hans.bookstoreapi.repositories.BookRepository;
 import com.hans.bookstoreapi.responses.BackendResponse;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,6 +30,11 @@ public class AdminBookService {
     }
 
     public Book create(BookFormDTO bookFormDTO){
+        String slug = bookFormDTO.getSlug();
+        boolean slugAlreadyExist = bookRepository.existsBySlug(slug);
+        if(slugAlreadyExist){
+            throw  new BadRequestException("Slug already exists");
+        }
         Book book = new Book();
         book.setTitle(bookFormDTO.getTitle());
         book.setDescription(bookFormDTO.getDescription());
