@@ -56,8 +56,13 @@ public class AdminBookService {
     }
 
     public ResponseEntity<BackendResponse> update(Integer id, BookFormDTO bookFormDTO){
+        String slug = bookFormDTO.getSlug();
+        boolean slugAlreadyExist = bookRepository.existsBySlugAndIdNot(slug, id);
+
         if(!bookRepository.existsById(id)){
             return ResponseEntity.status(404).body(new BackendResponse("Book not found"));
+        } else if (slugAlreadyExist) {
+            return ResponseEntity.status(400).body(new BackendResponse("Slug already exists"));
         } else {
             Book bookToUpdate = bookRepository.findById(id).get();
             bookToUpdate.setTitle(bookFormDTO.getTitle());

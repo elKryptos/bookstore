@@ -12,7 +12,6 @@ import java.util.UUID;
 import com.hans.bookstoreapi.exception.ResourceNotFoundException;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -54,7 +53,7 @@ public class FileSystemStorageService implements StorageService {
             Path destinationFile = this.rootLocation.resolve(Paths.get(filename)).normalize().toAbsolutePath();
             if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
                 // This is a security check
-                throw new RuntimeException("Cannot store file outside current directory.");
+                throw new RuntimeException("Cannot store a file outside the current directory.");
             }
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
