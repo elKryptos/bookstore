@@ -1,8 +1,7 @@
 package com.hans.bookstoreapi.controllers;
 
-import com.hans.bookstoreapi.dto.BookFormDTO;
-import com.hans.bookstoreapi.entities.Book;
-import com.hans.bookstoreapi.repositories.BookRepository;
+import com.hans.bookstoreapi.model.dto.BookFormDTO;
+import com.hans.bookstoreapi.model.entity.Book;
 
 import com.hans.bookstoreapi.responses.BackendResponse;
 import com.hans.bookstoreapi.services.AdminBookService;
@@ -16,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("/api/admin/books")

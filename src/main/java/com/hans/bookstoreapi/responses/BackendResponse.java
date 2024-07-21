@@ -1,6 +1,6 @@
 package com.hans.bookstoreapi.responses;
 
-import com.hans.bookstoreapi.entities.Book;
+import com.hans.bookstoreapi.model.entity.Book;
 import lombok.Data;
 
 

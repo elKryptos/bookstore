@@ -1,7 +1,6 @@
-package com.hans.bookstoreapi.entities;
+package com.hans.bookstoreapi.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;

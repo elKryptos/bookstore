@@ -1,4 +1,4 @@
-package com.hans.bookstoreapi.dto;
+package com.hans.bookstoreapi.model.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
