@@ -14,26 +14,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @NotBlank
     private String firstname;
-
-    @NotBlank
     private String lastname;
-
-    @NotBlank
     private String fullname;
-
-    @NotBlank
-    @Email
     private String email;
-
     @JsonIgnore
     private String password;
-
     @Enumerated(EnumType.STRING)
-    private Enum role;
-
+    private Role role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public enum Role {
+        ADMIN,
+        USER
+    }
+
 }
