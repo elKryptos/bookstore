@@ -32,7 +32,12 @@ public class AdminUserController {
 
     @PostMapping
     User create(@RequestBody @Validated UserFormDTO userFormDTO) {
-        return null;
+        User user = new User();
+        user.setFirstname(userFormDTO.getFirstname());
+        user.setLastname(userFormDTO.getLastname());
+        user.setFullname(userFormDTO.getFullname());
+        user.setEmail(userFormDTO.getEmail());
+        return userRepository.save(user);
     }
 
     @PutMapping("/{id}")
