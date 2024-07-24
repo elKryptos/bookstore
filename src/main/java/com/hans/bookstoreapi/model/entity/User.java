@@ -1,9 +1,6 @@
 package com.hans.bookstoreapi.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -18,7 +15,6 @@ public class User {
     private String lastname;
     private String fullname;
     private String email;
-    @JsonIgnore
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -29,5 +25,4 @@ public class User {
         ADMIN,
         USER
     }
-
 }
