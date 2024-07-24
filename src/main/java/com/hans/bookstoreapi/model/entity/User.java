@@ -3,6 +3,7 @@ package com.hans.bookstoreapi.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 import java.time.LocalDateTime;
 
 @Data

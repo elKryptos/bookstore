@@ -3,6 +3,7 @@ package com.hans.bookstoreapi.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 import java.time.LocalDateTime;
 
 @Data
@@ -16,8 +17,9 @@ public class Purchase {
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
-    @JoinColumn
-    private User customerId;
+    @ManyToOne
+    @JoinColumn(name = "custormer_id", referencedColumnName = "id")
+    private User customer;
 
     public enum PaymentStatus{
         PENDING,
