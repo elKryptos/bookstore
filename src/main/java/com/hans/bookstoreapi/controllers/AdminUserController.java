@@ -30,6 +30,11 @@ public class AdminUserController {
         return userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
+    @PostMapping
+    User create(@RequestBody @Validated UserFormDTO userFormDTO) {
+        return null;
+    }
+
     @PutMapping("/{id}")
     User update(@PathVariable int id, @Validated @RequestBody UserFormDTO dto) {
         return null;
@@ -37,6 +42,7 @@ public class AdminUserController {
 
     @DeleteMapping("/{id}")
     void delete(@PathVariable int id) {
-        
+        User user = userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        userRepository.delete(user);
     }
 }
