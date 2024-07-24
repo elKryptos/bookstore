@@ -12,12 +12,15 @@ public class Purchase {
     @GeneratedValue
     private Integer id;
     private Float total;
-    @Enumerated(EnumType.STRING)
-    private paymentStatus paymentStatus;
     private LocalDateTime createdAt;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 
-    public enum paymentStatus{
-        PAGATO,
-        NONPAGATO;
+    @JoinColumn
+    private User customerId;
+
+    public enum PaymentStatus{
+        PENDING,
+        PAID
     }
 }
