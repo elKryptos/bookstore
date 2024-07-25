@@ -66,7 +66,7 @@ public class PurchaseService {
         Purchase purchase = purchaseItem.getPurchase();
 
         if (purchase.getPaymentStatus().equals(Purchase.PaymentStatus.PENDING)) {
-            throw new BadRequestException("La compra no ha sido pagada aún.");
+            throw new BadRequestException("Item not paid yet");
         }
 
         if (purchaseItem.getDownloadAvailable() > 0) {
@@ -76,7 +76,7 @@ public class PurchaseService {
             purchaseItemRepository.save(purchaseItem);
             return storageService.loadAsResource(purchaseItem.getBook().getFilePath());
         } else {
-            throw new BadRequestException("No se puede descargar más este libro.");
+            throw new BadRequestException("Download not available, limit reached");
         }
     }
 }
