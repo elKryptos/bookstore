@@ -10,6 +10,7 @@ import com.hans.bookstoreapi.repositories.PurchaseItemRepository;
 import com.hans.bookstoreapi.repositories.PurchaseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,22 +58,25 @@ public class PurchaseService {
         return purchaseRepository.save(purchase);
     }
 
-    public Resource getItemResource(Integer purchaseId, Integer itemId){
+    public Resource getItemResource(Integer purchaseId, Integer itemId) {
         PurchaseItem purchaseItem = purchaseItemRepository
                 .findByIdAndPurchaseId(itemId, purchaseId)
                 .orElseThrow(ResourceNotFoundException::new);
+
         Purchase purchase = purchaseItem.getPurchase();
-        if(purchase.getPaymentStatus().equals(Purchase.PaymentStatus.PENDING)){
-            throw new BadRequestException("The purchase is not paid");
+
+        if (purchase.getPaymentStatus().equals(Purchase.PaymentStatus.PENDING)) {
+            throw new BadRequestException("La compra no ha sido pagada aún.");
         }
-        if(purchaseItem.getDownloadAvailable() > 0){
-           purchaseItem.setDownloadAvailable(
-                   purchaseItem.getDownloadAvailable() - 1
-           );
-           purchaseItemRepository.save(purchaseItem);
-           return storageService.loadAsResource(purchaseItem.getBook().getFilePath());
+
+        if (purchaseItem.getDownloadAvailable() > 0) {
+            purchaseItem.setDownloadAvailable(
+                    purchaseItem.getDownloadAvailable() - 1
+            );
+            purchaseItemRepository.save(purchaseItem);
+            return storageService.loadAsResource(purchaseItem.getBook().getFilePath());
         } else {
-            throw new BadRequestException("The purchase has already been downloaded 3 times and cannot be downloaded");
+            throw new BadRequestException("No se puede descargar más este libro.");
         }
     }
 }

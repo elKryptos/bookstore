@@ -27,7 +27,4 @@ public class User {
         ADMIN,
         USER
     }
-
-    @OneToMany(mappedBy = "customer")
-    private List<Purchase> purchase;
 }

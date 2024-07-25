@@ -18,24 +18,25 @@ public class RestExceptionHandler {
 
     private MessageSource messageSource;
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Error validation in the request, control please!");
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,
+                "La solicitud tiene unos errores de validación.");
 
         Set<String> errors = new HashSet<>();
-        List<FieldError> fieldError = ex.getFieldErrors();
+        List<FieldError> fieldErrors = ex.getFieldErrors();
 
-        for (FieldError fe : fieldError) {
+        for (FieldError fe : fieldErrors) {
             String message = messageSource.getMessage(fe, Locale.getDefault());
             errors.add(message);
         }
         problemDetail.setProperty("errors", errors);
+
         return problemDetail;
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ProblemDetail handleResourceNotFoundException(ResourceNotFoundException ex) {
+    public ProblemDetail handleBadRequestException(BadRequestException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 }

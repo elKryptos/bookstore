@@ -29,7 +29,10 @@ public class MediaController {
     public ResponseEntity<Resource> getResource(@PathVariable String filename) throws IOException {
         Resource resource = storageService.loadAsResource(filename);
         String contentType =  Files.probeContentType(resource.getFile().toPath());
-        return ResponseEntity.status(200).header(HttpHeaders.CONTENT_TYPE, contentType).body(resource);
+        return ResponseEntity
+                .status(200)
+                .header(HttpHeaders.CONTENT_TYPE, contentType)
+                .body(resource);
     }
 
 }

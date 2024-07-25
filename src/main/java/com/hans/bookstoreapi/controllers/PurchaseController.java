@@ -25,11 +25,11 @@ public class PurchaseController {
         return purchaseService.findById(id);
     }
 
-    @GetMapping("/purchases/{purchasesId}/items/{itemId}/book/file")
+    @GetMapping("/{purchaseId}/items/{itemId}/book/file")
     Resource downloadBookFromPurchaseItem(
-            @PathVariable Integer purchasesId,
+            @PathVariable Integer purchaseId,
             @PathVariable Integer itemId
-    ){
-        return purchaseService.getItemResource(purchasesId, itemId);
+    ) {
+        return purchaseService.getItemResource(purchaseId, itemId);
     }
 }

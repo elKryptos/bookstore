@@ -12,8 +12,11 @@ public class Purchase {
     @Id
     @GeneratedValue
     private Integer id;
+
     private Float total;
+
     private LocalDateTime createdAt;
+
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
