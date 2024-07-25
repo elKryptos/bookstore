@@ -18,8 +18,6 @@ public class PurchaseItem {
     @Column(name = "down_ava")
     private Integer downloadAvailable;
 
-    private Integer customer;
-
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;

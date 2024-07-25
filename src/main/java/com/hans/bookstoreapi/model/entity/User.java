@@ -28,6 +28,6 @@ public class User {
         USER
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "customer")
     private List<Purchase> purchase;
 }

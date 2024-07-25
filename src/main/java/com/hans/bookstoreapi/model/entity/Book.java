@@ -1,5 +1,6 @@
 package com.hans.bookstoreapi.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,5 +23,6 @@ public class Book {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "book")
+    @JsonIgnore
     private List<PurchaseItem> purchaseItems;
 }

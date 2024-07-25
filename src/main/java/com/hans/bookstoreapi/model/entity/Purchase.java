@@ -19,7 +19,7 @@ public class Purchase {
     private PaymentStatus paymentStatus;
 
     @ManyToOne
-    @JoinColumn(name = "custormer_id", referencedColumnName = "id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private User customer;
 
     @OneToMany(mappedBy = "purchase")
