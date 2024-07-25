@@ -8,6 +8,7 @@ import com.hans.bookstoreapi.repositories.BookRepository;
 import com.hans.bookstoreapi.repositories.PurchaseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,13 +20,20 @@ public class PurchaseService {
     private PurchaseRepository purchaseRepository;
     private BookRepository bookRepository;
 
-    public Purchase create(List<Integer> booksIds){
+    public Purchase findById(Integer id){
+        return purchaseRepository
+                .findById(id)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @Transactional
+    public Purchase create(List<Integer> bookIds){
         Purchase purchase = new Purchase();
         purchase.setCreatedAt(LocalDateTime.now());
         purchase.setPaymentStatus(Purchase.PaymentStatus.PENDING);
         purchase.setCustomer(null);
         float total = 0;
-        for (int bookId : booksIds) {
+        for (int bookId : bookIds) {
             Book book = bookRepository
                     .findById(bookId)
                     .orElseThrow(ResourceNotFoundException::new);
@@ -38,6 +46,5 @@ public class PurchaseService {
         }
         purchase.setTotal(total);
         return purchaseRepository.save(purchase);
-
     }
 }
