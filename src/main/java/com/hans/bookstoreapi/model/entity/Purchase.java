@@ -5,6 +5,7 @@ import lombok.Data;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,6 +21,9 @@ public class Purchase {
     @ManyToOne
     @JoinColumn(name = "custormer_id", referencedColumnName = "id")
     private User customer;
+
+    @OneToMany(mappedBy = "purchase")
+    private List<PurchaseItem> items;
 
     public enum PaymentStatus{
         PENDING,

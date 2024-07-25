@@ -5,6 +5,7 @@ import lombok.Data;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,4 +27,7 @@ public class User {
         ADMIN,
         USER
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<Purchase> purchase;
 }

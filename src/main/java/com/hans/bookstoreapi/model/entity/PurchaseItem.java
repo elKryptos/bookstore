@@ -1,19 +1,31 @@
 package com.hans.bookstoreapi.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
 public class PurchaseItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private Float price;
-    private Integer download;
+
+    @Column(name = "down_ava")
+    private Integer downloadAvailable;
+
     private Integer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private Book book;
+
+    @ManyToOne
+    @JoinColumn(name = "purchase_id", referencedColumnName = "id")
+    private Purchase purchase;
 
 }
