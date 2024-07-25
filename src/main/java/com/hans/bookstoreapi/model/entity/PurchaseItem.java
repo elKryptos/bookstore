@@ -1,10 +1,9 @@
 package com.hans.bookstoreapi.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @Entity
@@ -15,13 +14,14 @@ public class PurchaseItem {
 
     private Float price;
 
-    @Column(name = "down_ava")
+    @Column(name = "downs_ava")
     private Integer downloadAvailable;
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "purchase_id", referencedColumnName = "id")
     private Purchase purchase;

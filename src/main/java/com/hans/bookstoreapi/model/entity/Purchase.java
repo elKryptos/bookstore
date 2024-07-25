@@ -3,7 +3,6 @@ package com.hans.bookstoreapi.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class Purchase {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private User customer;
 
-    @OneToMany(mappedBy = "purchase")
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
     private List<PurchaseItem> items;
 
     public enum PaymentStatus{

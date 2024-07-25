@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -38,6 +39,7 @@ public class PurchaseService {
         purchase.setPaymentStatus(Purchase.PaymentStatus.PENDING);
         purchase.setCustomer(null);
         float total = 0;
+        List<PurchaseItem> items = new ArrayList<>();
         for (int bookId : bookIds) {
             Book book = bookRepository
                     .findById(bookId)
@@ -47,9 +49,11 @@ public class PurchaseService {
             purchaseItem.setPrice(book.getPrice());
             purchaseItem.setBook(book);
             purchaseItem.setDownloadAvailable(3);
+            items.add(purchaseItem);
             total += book.getPrice();
         }
         purchase.setTotal(total);
+        purchase.setItems(items);
         return purchaseRepository.save(purchase);
     }
 
