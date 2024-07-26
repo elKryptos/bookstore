@@ -68,7 +68,6 @@ public class PurchaseService {
         if (purchase.getPaymentStatus().equals(Purchase.PaymentStatus.PENDING)) {
             throw new BadRequestException("Item not paid yet");
         }
-
         if (purchaseItem.getDownloadAvailable() > 0) {
             purchaseItem.setDownloadAvailable(
                     purchaseItem.getDownloadAvailable() - 1
