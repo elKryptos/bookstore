@@ -36,7 +36,7 @@ public class AdminBookController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping("/create")
     public Book create(@RequestBody @Validated BookFormDTO bookFormDTO){
         return adminBookService.create(bookFormDTO);
     }

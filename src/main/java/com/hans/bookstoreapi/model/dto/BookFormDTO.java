@@ -10,7 +10,7 @@ public class BookFormDTO {
     private String title;
 
     @NotNull
-    @Pattern(regexp = "[a-z0-9-]+")
+    @Pattern(regexp = "[a-z0-9-]")
     private String slug;
 
     @NotBlank

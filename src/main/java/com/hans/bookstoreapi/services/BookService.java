@@ -4,17 +4,18 @@ import com.hans.bookstoreapi.model.entity.Book;
 import com.hans.bookstoreapi.exception.ResourceNotFoundException;
 import com.hans.bookstoreapi.repositories.BookRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class BookService {
 
-    BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     public List<Book> getLast6Books() {
         return bookRepository.findTop6ByOrderByCreatedAtDesc();
