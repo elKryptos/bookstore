@@ -16,7 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class AdminBookService {
+public class    AdminBookService {
 
     BookRepository bookRepository;
 
