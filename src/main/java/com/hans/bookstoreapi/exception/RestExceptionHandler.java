@@ -20,7 +20,7 @@ public class RestExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,
-                "La solicitud tiene unos errores de validación.");
+                "The request has some validation errors.");
 
         Set<String> errors = new HashSet<>();
         List<FieldError> fieldErrors = ex.getFieldErrors();
@@ -38,4 +38,6 @@ public class RestExceptionHandler {
     public ProblemDetail handleBadRequestException(BadRequestException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
+
+
 }
